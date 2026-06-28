@@ -11,7 +11,8 @@
     "llm-gateway"
   ],
   "scripts": {
-    "smoke": "bash scripts/smoke.sh"
+    "smoke": "bash scripts/smoke.sh",
+    "smoke:live": "RUN_LIVE_CONCENTRATE_SMOKE=1 bash scripts/smoke.sh"
   },
   "pi": {
     "extensions": [
@@ -19,6 +20,7 @@
     ]
   },
   "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
     "@earendil-works/pi-coding-agent": "*"
   }
 }

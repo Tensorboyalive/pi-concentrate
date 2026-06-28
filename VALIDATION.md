@@ -16,7 +16,7 @@ concentrate   glm-5.2   1.0M   256K   yes   no
 live model call:
 
 ```bash
-pi --model 'concentrate/glm-5.2:high' 'reply exactly: ok'
+pi -e /Users/lucifer/Documents/Lucifer/projects/pi-concentrate-provider --model 'concentrate/glm-5.2:low' --no-session 'reply exactly: ok'
 ```
 
 confirmed:
@@ -35,5 +35,6 @@ pi docs used:
 concentrate docs used:
 
 - `GET /v1/models`: public model catalog; no auth required
-- `POST /v1/responses`: production endpoint recommended by Concentrate
+- `POST /v1/chat/completions`: OpenAI-compatible client endpoint used by pi
+- `POST /v1/responses`: raw API endpoint; useful for direct curl checks
 - integration overview: base url `https://api.concentrate.ai/v1`, bearer auth, model ids

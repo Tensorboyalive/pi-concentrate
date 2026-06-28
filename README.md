@@ -20,7 +20,7 @@ pi install /absolute/path/to/pi-concentrate-provider
 git install after publishing:
 
 ```bash
-pi install https://github.com/<owner>/pi-concentrate-provider
+pi install https://github.com/Tensorboyalive/pi-concentrate
 ```
 
 then restart pi or run:
@@ -70,8 +70,11 @@ The extension registers a custom pi provider using `pi.registerProvider()`:
 - provider id: `concentrate`
 - display name: `Concentrate`
 - base url: `https://api.concentrate.ai/v1`
-- api: `openai-responses`
+- env base url is normalized, so `https://api.concentrate.ai` also works
+- api: `concentrate-completions`
 - api key: `$CONCENTRATE_API_KEY` fallback, with `/login` auth taking priority
+
+The package registers a dedicated pi API stream handler that posts to Concentrate's OpenAI Chat Completions-compatible endpoint with native `fetch`. This avoids the extra OpenAI SDK headers that can trip Concentrate's Cloudflare WAF while keeping OpenAI/OpenRouter providers untouched.
 
 The model catalog is loaded from Concentrate's public endpoint:
 
@@ -93,4 +96,4 @@ That endpoint does not require auth, so the provider can appear in `/login` befo
 
 ## notes
 
-Concentrate's docs recommend the Responses API for production. Their Chat Completions compatibility endpoint exists, but is beta. this package uses `openai-responses`.
+Concentrate's general API docs recommend the Responses API for production API integrations. For pi, this package intentionally uses the OpenAI Chat Completions-compatible endpoint via a dedicated native-fetch streamer because pi is an OpenAI-compatible coding client and that path matches Concentrate's integration docs.
